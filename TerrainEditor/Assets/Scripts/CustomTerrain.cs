@@ -175,38 +175,13 @@ public class CustomTerrain : MonoBehaviour
         }
         terrainData.SetHeights(0, 0, heightMap);
     }
-    public void SaveTerrain(/*path*/)
+    public void SaveTerrain()
     {
-        AssetDatabase.CreateAsset(terrainData, "Assets/Saves" + terrain.name + ".asset");
+        TerrainData data = (TerrainData)GameObject.Instantiate(terrainData);
+
+        var tmp = AssetDatabase.GenerateUniqueAssetPath("Assets/Saves/TerrainSave.asset");
+        AssetDatabase.CreateAsset(data, tmp);
     }
     
-    public static void SaveMeshInPlace(MenuCommand menuCommand)
-    {
-        MeshFilter mf = menuCommand.context as MeshFilter;
-        Mesh m = mf.sharedMesh;
-        SaveMesh(m, m.name, false, true);
-    }
-
-    public static void SaveMeshNewInstanceItem(MenuCommand menuCommand)
-    {
-        MeshFilter mf = menuCommand.context as MeshFilter;
-        Mesh m = mf.sharedMesh;
-        SaveMesh(m, m.name, true, true);
-    }
-
-    public static void SaveMesh(Mesh mesh, string name, bool makeNewInstance, bool optimizeMesh)
-    {
-        string path = EditorUtility.SaveFilePanel("Save Separate Mesh Asset", "Assets/", name, "asset");
-        if (string.IsNullOrEmpty(path)) return;
-
-        path = FileUtil.GetProjectRelativePath(path);
-
-        Mesh meshToSave = (makeNewInstance) ? Object.Instantiate(mesh) as Mesh : mesh;
-
-        if (optimizeMesh)
-            MeshUtility.Optimize(meshToSave);
-
-        AssetDatabase.CreateAsset(meshToSave, path);
-        AssetDatabase.SaveAssets();
-    }
+ 
 }

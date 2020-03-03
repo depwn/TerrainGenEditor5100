@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\CustomTerrainEditor.cs" />
-    <Compile Include="Assets\Editor\MeshSaverEditor.cs" />
     <Compile Include="Assets\GUITable\Examples\Scripts\Editor\ActionExampleEditor.cs" />
     <Compile Include="Assets\GUITable\Examples\Scripts\Editor\AdvancedExampleEditor.cs" />
     <Compile Include="Assets\GUITable\Examples\Scripts\Editor\AdvancedExampleWindow.cs" />

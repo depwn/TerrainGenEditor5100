@@ -116,16 +116,7 @@ public class CustomTerrainEditor : Editor
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         if (GUILayout.Button("Save Terrain"))
         {
-            //path = EditorGUILayout.TextField("Assets/", path);
-            //cterrain.SaveTerrain(path);
-            //CustomTerrain.SaveMeshInPlace();
-        }
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        if (GUILayout.Button("Save Terrain As"))
-        {
-            //path = EditorGUILayout.TextField("Assets/", path);
-            //cterrain.SaveTerrain(path);
-            //cterrain.SaveMesh
+            cterrain.SaveTerrain();
         }
 
         //applying modifications
