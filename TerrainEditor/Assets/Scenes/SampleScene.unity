@@ -388,5 +388,20 @@ MonoBehaviour:
   randomHeightRange: {x: 0, y: 0.1}
   terrain: {fileID: 1283555941}
   terrainData: {fileID: 15600000, guid: 914dff030c44e1a49881c422ba8f6a7b, type: 2}
-  perlinX: 0
-  perlinY: 0.01
+  resetTerrain: 1
+  perlinX: 0.02
+  perlinY: 0.02
+  perlinXoffset: 3000
+  perlinYoffset: 1240
+  perlinOctaves: 3
+  perlinPersistance: 5.8
+  perlinHeightScale: 0.09
+  perlinParameters:
+  - mPerlinX: 0.01
+    mPerlinY: 0.01
+    mPerlinXoffset: 0
+    mPerlinYoffset: 0
+    mPerlinOctaves: 3
+    mPerlinPersistance: 8
+    mPerlinHeightScale: 0.09
+    remove: 0

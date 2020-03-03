@@ -71,6 +71,7 @@
     <Compile Include="Assets\GUITable\Examples\Scripts\PropertyAttributeExample.cs" />
     <Compile Include="Assets\GUITable\Examples\Scripts\SimpleExample.cs" />
     <Compile Include="Assets\Scripts\CustomTerrain.cs" />
+    <Compile Include="Assets\Scripts\Utilities.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Depwn/Documents/Unity 2017 Projects/UnityRepositoryNew/GPR5100/TerrainGenEditor5100/TerrainEditor/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
