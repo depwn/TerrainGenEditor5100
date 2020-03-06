@@ -9,6 +9,7 @@ using System.IO;
 [CanEditMultipleObjects]
 public class CustomTerrainEditor : Editor
 {
+ 
     //Property List-- explained in CustomTerrain as well
     SerializedProperty randomHeightRange;
     SerializedProperty resetTerrain; //default yes--untick add to current HeightMap instead of resetting
@@ -19,9 +20,7 @@ public class CustomTerrainEditor : Editor
     SerializedProperty perlinOctaves;
     SerializedProperty perlinPersistance;
     SerializedProperty perlinHeightScale;
-    [SerializeField]
-    private string path;
-
+    
     GUITableState perlinParametersTable;//using EditorGUITable
     SerializedProperty perlinParameters;
     //menu folders
@@ -45,13 +44,48 @@ public class CustomTerrainEditor : Editor
         perlinParameters = serializedObject.FindProperty("perlinParameters");
 
     }
+    /*void OnSceneGUI()
+    {
+        
+        Event e = Event.current;
+        switch (e.type)
+        {
+            case EventType.KeyDown:
+                {
+                    if (Event.current.keyCode == (KeyCode.Alpha6))
+                    {
+                        //GUILayout.Button("Save Terrain");
+                        CustomTerrain cterrain = (CustomTerrain)target;
+                        cterrain.SaveTerrain();
+                    }
+                    break;
+                }
+        }
+    }*/
 
     public override void OnInspectorGUI()
     {
+      
         //updating values
         serializedObject.Update();
         //target is the linked script
         CustomTerrain cterrain = (CustomTerrain)target;
+        
+
+        Event e = Event.current;
+        switch (e.type)
+        {
+            case EventType.KeyDown:
+                {
+                    if (Event.current.keyCode == (KeyCode.Alpha6))
+                    {
+                        //GUILayout.Button("Save Terrain");
+                        
+                        cterrain.SaveTerrain();
+                    }
+                    break;
+                }
+        }
         EditorGUILayout.PropertyField(resetTerrain);
         //fold out button and fields
         randomHeight = EditorGUILayout.Foldout(randomHeight, "RandomHeight");
@@ -74,7 +108,7 @@ public class CustomTerrainEditor : Editor
             //empty line for some spacing
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
             GUILayout.Label("Perlin Noise", EditorStyles.boldLabel);
-            EditorGUILayout.Slider(perlinX, 0, 0.1f, new GUIContent("X"));//min 0 max 0.1 although still
+            EditorGUILayout.Slider(perlinX, 0, 0.1f, new GUIContent("X"));//min 0 max 0.1 although still 
             EditorGUILayout.Slider(perlinY, 0, 0.1f, new GUIContent("Y"));//gets too spiky
             EditorGUILayout.IntSlider(perlinXoffset, 0, 10000, new GUIContent("X Offset"));
             EditorGUILayout.IntSlider(perlinYoffset, 0, 10000, new GUIContent("Y Offset"));
@@ -114,9 +148,17 @@ public class CustomTerrainEditor : Editor
             cterrain.ResetTerrain();
         }
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+
         if (GUILayout.Button("Save Terrain"))
         {
+            //EditorGUILayout.HelpBox("Saving Terrain in Assets/Saves", MessageType.Info);
             cterrain.SaveTerrain();
+        }
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        
+        if (GUILayout.Button("Load Terrain"))
+        {
+            cterrain.LoadTerrain();
         }
 
         //applying modifications
