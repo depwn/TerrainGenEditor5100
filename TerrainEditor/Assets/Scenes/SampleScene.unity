@@ -306,10 +306,10 @@ MonoBehaviour:
   terrain: {fileID: 759727861}
   terrainData: {fileID: 15600000, guid: 914dff030c44e1a49881c422ba8f6a7b, type: 2}
   resetTerrain: 1
-  perlinX: 0.01
-  perlinY: 0.01
-  perlinXoffset: 0
-  perlinYoffset: 0
+  perlinX: 0.036
+  perlinY: 0.034
+  perlinXoffset: 745
+  perlinYoffset: 1277
   perlinOctaves: 3
   perlinPersistance: 8
   perlinHeightScale: 0.09

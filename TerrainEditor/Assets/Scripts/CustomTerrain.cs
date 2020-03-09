@@ -185,23 +185,11 @@ public class CustomTerrain : MonoBehaviour
     public void LoadTerrain()
     {
         TerrainData data= (TerrainData)AssetDatabase.LoadAssetAtPath("Assets/Saves/TerrainSave.asset",typeof(TerrainData));
-        //TerrainData data = (TerrainData)GameObject.Instantiate(terrainData);
-        //Instantiate(Resources.Load("Assets/Saves/TerrainSave.asset"));
-        //terrainData = data;
-        //float[,] heightMap = GetHeightMap();
-        //terrainData.SetHeights(0, 0, heightMap);
-
-        //TerrainData t1 = (TerrainData)Object.Instantiate(Resources.Load("Assets/Saves/TerrainSave.asset"));
-        //float[,] heightMap = GetHeightMap();
-        //heightMap = new float[terrainData.heightmapResolution, terrainData.heightmapResolution];
-        /*for (int i = 0; i < terrainData.heightmapResolution; i++)
-        {
-            for (int j = 0; j < terrainData.heightmapResolution; j++)
-            {
-                heightMap[i, j] = 
-            }
-        }
-        terrainData.SetHeights(0, 0, heightMap);**/
+        //this.terrain=FindObjectsOfTypeIncludingAssets<Terrain>
+        //CustomTerrain.FindObjectsOfTypeIncludingAssets(typeof(Terrain));
+        //CustomTerrain= GetComponent<Terrain>().terrainData;
+        data = GetComponent<Terrain>().terrainData;
+  
     }
 
 
