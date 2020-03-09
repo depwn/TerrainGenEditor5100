@@ -104,7 +104,7 @@ public class CustomTerrain : MonoBehaviour
             for (int x = 0; x < terrainData.heightmapResolution; x++)
             {
                 
-                heightMap[x, y] += Utilities.fBM((x+perlinXoffset) * perlinX, (y+perlinYoffset) * perlinY, perlinOctaves, perlinPersistance) * perlinHeightScale;
+                heightMap[x, y] += TerrainOptions.fBm((x+perlinXoffset) * perlinX, (y+perlinYoffset) * perlinY, perlinOctaves, perlinPersistance) * perlinHeightScale;
             }
         }
         terrainData.SetHeights(0, 0, heightMap);
@@ -119,7 +119,7 @@ public class CustomTerrain : MonoBehaviour
                 //adding all the PerlinNoise Curves
                 foreach (PerlinParameters t in perlinParameters)
                 {
-                    heightMap[x, y] += Utilities.fBM((x + t.mPerlinXoffset) * t.mPerlinX, (y + t.mPerlinYoffset) * t.mPerlinY, t.mPerlinOctaves, t.mPerlinPersistance) * t.mPerlinHeightScale;
+                    heightMap[x, y] += TerrainOptions.fBm((x + t.mPerlinXoffset) * t.mPerlinX, (y + t.mPerlinYoffset) * t.mPerlinY, t.mPerlinOctaves, t.mPerlinPersistance) * t.mPerlinHeightScale;
                 }
             }
         }

@@ -12,7 +12,7 @@ public class CustomTerrainEditor : Editor
  
     //Property List-- explained in CustomTerrain as well
     SerializedProperty randomHeightRange;
-    SerializedProperty resetTerrain; //default yes--untick add to current HeightMap instead of resetting
+    SerializedProperty resetTerrain; //default yes--untick in order to add to current HeightMap instead of resetting on each generation
     SerializedProperty perlinX;
     SerializedProperty perlinY;
     SerializedProperty perlinXoffset;
@@ -21,9 +21,9 @@ public class CustomTerrainEditor : Editor
     SerializedProperty perlinPersistance;
     SerializedProperty perlinHeightScale;
     
-    GUITableState perlinParametersTable;//using EditorGUITable
+    GUITableState perlinParametersTable;//using EditorGUITable (Unity Store Tool)
     SerializedProperty perlinParameters;
-    //menu folders
+    //inspector menu folders 
     bool randomHeight = false;
     bool perlinNoise = false;
     bool multiplePerlinNoise = false;
@@ -45,30 +45,14 @@ public class CustomTerrainEditor : Editor
         perlinParameters = serializedObject.FindProperty("perlinParameters");
 
     }
-    void OnSceneGUI()
-    {
-        CustomTerrain cterrain = (CustomTerrain)target;
-        Event e = Event.current;
-        switch (e.type)
-        {
-            case EventType.KeyDown:
-                {
-                    if (e.keyCode == (KeyCode.Alpha6))
-                    {
-                        Debug.Log("Working");
-                        cterrain.SaveTerrain();
-                    }
-                    break;
-                }
-        }
-    }
+
     public override void OnInspectorGUI()
     {
       
         //updating values
         serializedObject.Update();
         //target is the linked script
-        CustomTerrain cterrain = (CustomTerrain)target;
+        CustomTerrain customTerrain = (CustomTerrain)target;
         
 
         Event e = Event.current;
@@ -78,35 +62,35 @@ public class CustomTerrainEditor : Editor
                 {
                     if (e.keyCode == (KeyCode.Alpha6))
                     {
-                        cterrain.SaveTerrain();
+                        customTerrain.SaveTerrain();
                     }
                     if (e.keyCode == (KeyCode.Alpha7))
                     {
-                        cterrain.RandomTerrain();
+                        customTerrain.RandomTerrain();
                     }
                     if (e.keyCode == (KeyCode.Alpha8))
                     {
-                        cterrain.PerlinNoise();
+                        customTerrain.PerlinNoise();
                     }
                     if (e.keyCode == (KeyCode.Alpha3))
                     {
-                        cterrain.MultiplePerlinNoise();
+                        customTerrain.MultiplePerlinNoise();
                     }
                     if (e.keyCode == (KeyCode.Alpha4))
                     {
-                        cterrain.AddPerlinNoise();
+                        customTerrain.AddPerlinNoise();
                     }
                     if (e.keyCode == (KeyCode.Alpha5))
                     {
-                        cterrain.RemovePerlinNoise();
+                        customTerrain.RemovePerlinNoise();
                     }
                     if (e.keyCode == (KeyCode.Alpha1))
                     {
-                        cterrain.ResetTerrain();
+                        customTerrain.ResetTerrain();
                     }
                     if (e.keyCode == (KeyCode.Alpha0))
                     {
-                        cterrain.LoadTerrain();
+                        customTerrain.LoadTerrain();
                     }
                     break;
                 }
@@ -116,13 +100,12 @@ public class CustomTerrainEditor : Editor
         randomHeight = EditorGUILayout.Foldout(randomHeight, "RandomHeight");
         if (randomHeight)
         {
-            //empty line for some spacing
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
             GUILayout.Label("Set a random height within range", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(randomHeightRange);
             if (GUILayout.Button(new GUIContent("Random Height", "Random Height Terrain Generation")))
             {
-                cterrain.RandomTerrain(); //method in CustomTerrain
+                customTerrain.RandomTerrain(); 
             }
         }
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
@@ -130,11 +113,10 @@ public class CustomTerrainEditor : Editor
         perlinNoise = EditorGUILayout.Foldout(perlinNoise, "PerlinNoise");
         if (perlinNoise)
         {
-            //empty line for some spacing
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
             GUILayout.Label("Perlin Noise", EditorStyles.boldLabel);
             EditorGUILayout.Slider(perlinX, 0, 0.1f, new GUIContent("X"));//min 0 max 0.1 although still 
-            EditorGUILayout.Slider(perlinY, 0, 0.1f, new GUIContent("Y"));//gets too spiky
+            EditorGUILayout.Slider(perlinY, 0, 0.1f, new GUIContent("Y"));//gets too "spiky"
             EditorGUILayout.IntSlider(perlinXoffset, 0, 10000, new GUIContent("X Offset"));
             EditorGUILayout.IntSlider(perlinYoffset, 0, 10000, new GUIContent("Y Offset"));
             EditorGUILayout.IntSlider(perlinOctaves, 1, 10, new GUIContent("Octaves"));
@@ -143,7 +125,7 @@ public class CustomTerrainEditor : Editor
 
             if (GUILayout.Button(new GUIContent("Perlin Noise", "Simle Perlin Noise generation")))
             {
-                cterrain.PerlinNoise(); //method in CustomTerrain
+                customTerrain.PerlinNoise(); 
             }
         }
         multiplePerlinNoise = EditorGUILayout.Foldout(multiplePerlinNoise, "Multiple Perlin Noise");
@@ -155,34 +137,34 @@ public class CustomTerrainEditor : Editor
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button(new GUIContent("+", "Adding an extra Perlin Curve")))
             {
-                cterrain.AddPerlinNoise();
+                customTerrain.AddPerlinNoise();
             }
             if (GUILayout.Button(new GUIContent("-", "Removing the selected Perlin Curve")))
             {
-                cterrain.RemovePerlinNoise();
+                customTerrain.RemovePerlinNoise();
             }
             EditorGUILayout.EndHorizontal();
             if (GUILayout.Button(new GUIContent("Apply Multiple Perlin", "Applying Multiple Perlin Noise Curves")))
             {
-                cterrain.MultiplePerlinNoise();
+                customTerrain.MultiplePerlinNoise();
             }
         }
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         if (GUILayout.Button(new GUIContent("Reset Terrain", "will completely reset terrain")))
         {
-            cterrain.ResetTerrain();
+            customTerrain.ResetTerrain();
         }
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
         if (GUILayout.Button(new GUIContent("Save Terrain", "Saving Terrain in Assets/Saves")))
         {
-            cterrain.SaveTerrain();
+            customTerrain.SaveTerrain();
         }
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         
         if (GUILayout.Button(new GUIContent("Load Terrain", "Loading Terrain from Assets/Saves")))
         {
-            cterrain.LoadTerrain();
+            customTerrain.LoadTerrain();
         }
 
         //applying modifications
