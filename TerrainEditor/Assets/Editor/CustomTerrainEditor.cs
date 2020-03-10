@@ -160,11 +160,17 @@ public class CustomTerrainEditor : Editor
         {
             customTerrain.SaveTerrain();
         }
+
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        
         if (GUILayout.Button(new GUIContent("Load Terrain", "Loading Terrain from Assets/Saves")))
         {
             customTerrain.LoadTerrain();
+        }
+
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        if (GUILayout.Button(new GUIContent("Help Window", "Will open Help Window")))
+        {
+            HelpWindow.ShowHelpWindow();
         }
 
         //applying modifications

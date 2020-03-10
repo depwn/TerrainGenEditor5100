@@ -185,11 +185,9 @@ public class CustomTerrain : MonoBehaviour
     public void LoadTerrain()
     {
         TerrainData data= (TerrainData)AssetDatabase.LoadAssetAtPath("Assets/Saves/TerrainSave.asset",typeof(TerrainData));
-        //this.terrain=FindObjectsOfTypeIncludingAssets<Terrain>
-        //CustomTerrain.FindObjectsOfTypeIncludingAssets(typeof(Terrain));
-        //CustomTerrain= GetComponent<Terrain>().terrainData;
-        data = GetComponent<Terrain>().terrainData;
-  
+        TerrainData tmp = new TerrainData();
+        tmp = data;
+        GameObject go = Instantiate(Terrain.CreateTerrainGameObject(tmp));
     }
 
 
